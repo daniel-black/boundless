@@ -1,5 +1,6 @@
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+// @ts-ignore
 import style from "react-syntax-highlighter/dist/esm/styles/prism/lucario";
 import { CopyCodeButton } from "./CopyCodeButton";
 
@@ -18,6 +19,7 @@ export function Markdown({ content }: { content: string }) {
                 <CopyCodeButton code={regexedText} />
               </div>
               {match ? (
+                // @ts-ignore
                 <SyntaxHighlighter
                   {...rest}
                   style={style}
