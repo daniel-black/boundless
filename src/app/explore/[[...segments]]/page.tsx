@@ -1,10 +1,8 @@
 import OpenAI from "openai";
-import Markdown from "react-markdown";
 import { RecommendedLinks } from "./RecommendedLinks";
 import { H1 } from "@/components/ui/typography/H1";
 import { H2 } from "@/components/ui/typography/H2";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import style from "react-syntax-highlighter/dist/esm/styles/prism/lucario";
+import { Markdown } from "./Markdown";
 
 export const runtime = "edge";
 
@@ -74,29 +72,7 @@ export default async function DynamicPage({ params }: DynamicPageProps) {
           <div className="space-y-3">
             <H1>{pageData?.title}</H1>
             <H2>{pageData?.subTitle}</H2>
-            <Markdown
-              components={{
-                code(props) {
-                  const { children, className, node, ...rest } = props;
-                  const match = /language-(\w+)/.exec(className || "");
-                  return match ? (
-                    <SyntaxHighlighter
-                      {...rest}
-                      children={String(children).replace(/\n$/, "")}
-                      style={style}
-                      language={match[1]}
-                      PreTag="div"
-                    />
-                  ) : (
-                    <code {...rest} className={className}>
-                      {children}
-                    </code>
-                  );
-                },
-              }}
-            >
-              {pageData?.content}
-            </Markdown>
+            <Markdown content={pageData?.content ?? ""} />
           </div>
         ) : null}
       </div>
