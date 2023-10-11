@@ -20,11 +20,12 @@ export function Markdown({ content }: { content: string }) {
               {match ? (
                 <SyntaxHighlighter
                   {...rest}
-                  children={regexedText}
                   style={style}
                   language={match[1]}
                   PreTag="div"
-                />
+                >
+                  {regexedText}
+                </SyntaxHighlighter>
               ) : (
                 <code {...rest} className={className}>
                   {children}
