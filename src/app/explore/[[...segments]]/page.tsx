@@ -17,7 +17,11 @@ export default async function DynamicPage({
   params: { segments?: string[] };
 }) {
   if (!params?.segments) {
-    return <div>you need to put something after the "/explore" in the url</div>;
+    return (
+      <div>
+        you need to put something after the &quot;/explore&quot; in the url
+      </div>
+    );
   }
 
   let pageData = undefined;
