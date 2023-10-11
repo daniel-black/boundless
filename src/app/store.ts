@@ -1,8 +1,10 @@
 import { create } from "zustand";
 
-interface PagesState {
+interface AppState {
   pages: Page[];
+  suggestedLinks: SuggestedLink[];
   addPage: (newPage: Page) => void;
+  setSuggestedLinks: (links: SuggestedLink[]) => void;
 }
 
 type Page = {
@@ -10,15 +12,17 @@ type Page = {
   title: string;
   subTitle: string;
   content: string;
-  nextLinks: NextLink[];
+  suggestedLinks: SuggestedLink[];
 };
 
-export type NextLink = {
+export type SuggestedLink = {
   href: string;
   text: string;
 };
 
-export const usePagesStore = create<PagesState>()((set) => ({
+export const useStore = create<AppState>()((set) => ({
   pages: [],
+  suggestedLinks: [],
   addPage: (newPage) => set((state) => ({ pages: [...state.pages, newPage] })),
+  setSuggestedLinks: (links) => set(() => ({ suggestedLinks: links })),
 }));

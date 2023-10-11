@@ -4,13 +4,13 @@ import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ArrowLeftIcon } from "lucide-react";
 import Link from "next/link";
-import { useSelectedLayoutSegment } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export function ReturnToExploreLink() {
-  // segment will be null if we are on /explore
-  const segment = useSelectedLayoutSegment();
+  const pathName = usePathname();
+  const onExplorePage = pathName.endsWith("/explore");
 
-  return segment ? (
+  return onExplorePage ? null : (
     <Link
       href="/explore"
       className={cn(
@@ -21,5 +21,5 @@ export function ReturnToExploreLink() {
       <ArrowLeftIcon className="h-[14px] w-[14px] group-hover:-translate-x-1 transition ease-in-out" />
       <span>Return to Explore</span>
     </Link>
-  ) : null;
+  );
 }

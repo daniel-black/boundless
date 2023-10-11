@@ -13,27 +13,25 @@ export function Markdown({ content }: { content: string }) {
           const match = /language-(\w+)/.exec(className || "");
           const regexedText = String(children).replace(/\n$/, "");
 
-          return (
+          return match ? (
             <div className="relative">
               <div className="absolute z-10 w-full flex justify-end pr-2 pt-2">
                 <CopyCodeButton code={regexedText} />
               </div>
-              {match ? (
-                // @ts-ignore
-                <SyntaxHighlighter
-                  {...rest}
-                  style={style}
-                  language={match[1]}
-                  PreTag="div"
-                >
-                  {regexedText}
-                </SyntaxHighlighter>
-              ) : (
-                <code {...rest} className={className}>
-                  {children}
-                </code>
-              )}
+              {/* @ts-ignore */}
+              <SyntaxHighlighter
+                {...rest}
+                style={style}
+                language={match[1]}
+                PreTag="div"
+              >
+                {regexedText}
+              </SyntaxHighlighter>
             </div>
+          ) : (
+            <code {...rest} className={className}>
+              {children}
+            </code>
           );
         },
       }}

@@ -5,7 +5,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { BirdIcon, FileStackIcon, ListTreeIcon } from "lucide-react";
-import Link from "next/link";
 import { ReturnToExploreLink } from "./ReturnToExploreLink";
 
 export function Sidebar() {

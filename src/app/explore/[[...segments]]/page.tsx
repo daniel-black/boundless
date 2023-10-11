@@ -1,5 +1,4 @@
 import OpenAI from "openai";
-import { RecommendedLinks } from "./RecommendedLinks";
 import { H1 } from "@/components/ui/typography/H1";
 import { H2 } from "@/components/ui/typography/H2";
 import { Markdown } from "./Markdown";
@@ -85,7 +84,7 @@ function formatPrompt(pathName: string) {
     "title": "<A concise string that describes the page>",
     "subTitle": "<A slightly longer string that adds useful context>",
     "content": "<The main content of the webpage (ALWAYS in markdown format). Be detailed and descriptive and do not make things up if you do not have enough information.>"
-    "nextLinks": "<A JavaScript array of objects that represent links that would logically make sense to explore after reading the ${pathName} page. Each object in the array has a \`href\` property and a \`text\` property.>"
+    "suggestedLinks": "<A JavaScript array of objects that represent links that would logically make sense to explore after reading the ${pathName} page. Each object in the array has a \`href\` property and a \`text\` property.>"
   }
   
   Below is an example of a good response:
@@ -94,7 +93,7 @@ function formatPrompt(pathName: string) {
     "title": "The Go Programming Language",
     "subTitle": "Go: Streamlined Simplicity for Modern Development",
     "content": "Go is expressive, concise, clean, and efficient. Its concurrency mechanisms make it easy to write programs that get the most out of...",
-    "nextLinks": [
+    "suggestedLinks": [
       {"href":"/variables-in-go","text":"Variables in Go"},
       {"href":"/loops-in-go","text":"Loops in Go"},
       {"href":"/go-concurrency-model","text":"Concurrency in Go"},
