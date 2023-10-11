@@ -1,9 +1,8 @@
-import { NextLink } from "@/app/store";
-import Link from "next/link";
 import OpenAI from "openai";
 import { RecommendedLinks } from "./RecommendedLinks";
 import { H1 } from "@/components/ui/typography/H1";
 import { H2 } from "@/components/ui/typography/H2";
+import Markdown from "react-markdown";
 
 export const runtime = "edge";
 
@@ -11,11 +10,19 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY!,
 });
 
-export default async function DynamicPage({
-  params,
-}: {
+type DynamicPageProps = {
   params: { segments?: string[] };
-}) {
+};
+
+export async function generateMetadata({ params }: DynamicPageProps) {
+  return {
+    title: params?.segments
+      ? params.segments[0].replaceAll("-", " ")
+      : "Boundless",
+  };
+}
+
+export default async function DynamicPage({ params }: DynamicPageProps) {
   if (!params?.segments) {
     return (
       <div>
@@ -65,6 +72,7 @@ export default async function DynamicPage({
           <div className="space-y-3">
             <H1>{pageData?.title}</H1>
             <H2>{pageData?.subTitle}</H2>
+            <Markdown>{pageData?.content}</Markdown>
             <p className="leading-relaxed">{pageData?.content}</p>
           </div>
         ) : null}
